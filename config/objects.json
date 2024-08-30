@@ -1,5 +1,5 @@
-{   
-    "objects": 
+{
+    "objects":
     [
         {
             "type": "sensor.pseudo.traffic_lights",
@@ -27,7 +27,7 @@
             "attributes": {
                 "color": "60, 60, 130"
             },
-            "sensors": 
+            "sensors":
             [
                 {
                     "type": "sensor.camera.rgb",
@@ -37,6 +37,24 @@
                     "image_size_x": 800,
                     "image_size_y": 600,
                     "fov": 90.0
+                },
+                {
+                    "type": "sensor.camera.rgb",
+                    "id": "sensing/camera/wide",
+                    "frame_id": "camera_wide_front_link",
+                    "spawn_point": {"x": 2.193, "y": 0.0, "z": 2.035, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
+                    "image_size_x": 1280,
+                    "image_size_y": 720,
+                    "fov": 120
+                },
+                {
+                    "type": "sensor.camera.depth",
+                    "id": "sensing/camera/depth",
+                    "frame_id": "camera_depth_front_link",
+                    "spawn_point": {"x": 2.193, "y": 0.0, "z": 2.035, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
+                    "image_size_x": 1280,
+                    "image_size_y": 720,
+                    "fov": 120
                 },
                 {
                     "type": "sensor.lidar.ray_cast",
@@ -53,14 +71,27 @@
                 },
                 {
                     "type": "sensor.lidar.ray_cast",
-                    "id": "sensor/lidar/rear",
+                    "id": "sensor/lidar/front_right",
+                    "frame_id": "lidar_front",
+                    "spawn_point": {"x": 2.312, "y": 0.58, "z": 1.94, "roll": -19.6822631, "pitch": 0.0, "yaw": 0.0},
+                    "range": 120,
+                    "channels": 64,
+                    "points_per_second": 1310720,
+                    "upper_fov": 22.5,
+                    "lower_fov": -22.5,
+                    "rotation_frequency": 20,
+                    "noise_stddev": 0.0
+                },
+                {
+                    "type": "sensor.lidar.ray_cast",
+                    "id": "sensor/lidar/front_left",
                     "frame_id": "lidar_rear",
-                    "spawn_point": {"x": -1.5, "y": 0.0, "z": 2.100, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
-                    "range": 50,
-                    "channels": 32,
-                    "points_per_second": 96000,
-                    "upper_fov": 3.0,
-                    "lower_fov": -27.0,
+                    "spawn_point": {"x": 2.312, "y": -0.66, "z": 1.94, "roll": 19.6822631, "pitch": 0.0, "yaw": 0.0},
+                    "range": 120,
+                    "channels": 64,
+                    "points_per_second": 1310720,
+                    "upper_fov": 22.5,
+                    "lower_fov": -22.5,
                     "rotation_frequency": 20,
                     "noise_stddev": 0.0
                 },

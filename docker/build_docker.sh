@@ -32,6 +32,6 @@ done
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PARENT_DIR="$(dirname "$SCRIPT_DIR")"
 
-echo "Building the CARLA-Autoware-Bridge Dockerfile"
+echo "Building the CARLA-Autoware-Bridge Dockerfile1"
 
-docker build -f $SCRIPT_DIR/Dockerfile --tag $HUBNAME/$NAME:$TAG $PARENT_DIR
+docker build --network=host -f $SCRIPT_DIR/Dockerfile --tag $HUBNAME/$NAME:$TAG $PARENT_DIR

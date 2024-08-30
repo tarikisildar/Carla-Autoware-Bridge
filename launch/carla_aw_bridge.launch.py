@@ -35,6 +35,7 @@ class objectParser():
             "lidar": "sensor.lidar.ray_cast",
             "imu": "sensor.other.imu",
             "camera": "sensor.camera.rgb",
+            "depth" : "sensor.camera.depth",
             "odom": "sensor.pseudo.odom",
             "speedo": "sensor.pseudo.speedometer"
         }
@@ -64,14 +65,14 @@ class objectParser():
         # Function that checks the input sensor types
         for input_sensor_type in input_sensor_types:
             if input_sensor_type not in ["gnss", "lidar", "imu", 
-                                        "camera","odom", "speedo"]:
+                                        "camera","odom", "speedo", "depth"]:
                 raise ValueError("Sensor type not supported!")
 
         for sensor in self.sensors_:
             config_sensor_type = sensor["type"]
             for input_sensor_type in input_sensor_types:
                 if self.sensorTypeDict_[input_sensor_type] == config_sensor_type:
-                    if input_sensor_type == "camera":
+                    if input_sensor_type == "camera" or input_sensor_type == "depth":
                         topicList.append(sensor["id"] + "/image")
                         topicList.append(sensor["id"] + "/camera_info")
                         continue
@@ -105,7 +106,7 @@ class objectParser():
         # Function that checks the input sensor types
         for input_sensor_type in input_sensor_types:
             if input_sensor_type not in ["gnss", "lidar", "imu", 
-                                        "camera","odom", "speedo"]:
+                                        "camera","odom", "speedo", "depth"]:
                 raise ValueError("Sensor type not supported!")
 
         for sensor in self.sensors_:
@@ -113,7 +114,7 @@ class objectParser():
             for input_sensor_type in input_sensor_types:
                 if self.sensorTypeDict_[input_sensor_type] == config_sensor_type:
                     conversionString += "type: " + input_sensor_type 
-                    if input_sensor_type == "camera":
+                    if input_sensor_type == "camera" or input_sensor_type == "depth":
                         conversionString+= ", input: " + self.topicPrefix_ + "/" + sensor["id"] + "/image"
                         conversionString+= ", output: " + "/" + sensor["id"] + "/image"
                         conversionString += ";"
@@ -180,7 +181,7 @@ def launch_setup(context, *args, **kwargs):
                     'ego_vehicle_role_name')
             }
         ],
-        remappings=object_Parser.getRemaps("gnss", "camera", "imu", "lidar"))
+        remappings=object_Parser.getRemaps("gnss", "camera", "imu", "lidar", "depth"))
 
     carla_aw_bridge_launch = launch_ros.actions.Node(
             package='carla_autoware_bridge',

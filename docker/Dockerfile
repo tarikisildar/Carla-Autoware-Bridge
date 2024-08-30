@@ -20,7 +20,6 @@ WORKDIR /tum
 
 # Install apt packages
 RUN apt-get update && apt install software-properties-common -y \
-  && add-apt-repository ppa:deadsnakes/ppa -y \
   && apt-get update \
   && apt install python3-pip -y\
   && apt install git curl -y\
